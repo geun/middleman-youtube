@@ -7,8 +7,8 @@ module Middleman
         super
         extension = self
         app.before_render do |body|
-    		puts body.to_s
-          # extension.convert(body)
+    	  puts body
+          extension.convert(body)
         end
       end
 
