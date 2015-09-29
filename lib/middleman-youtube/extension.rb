@@ -11,6 +11,10 @@ module Middleman
         end
       end
 
+      def after_configuration
+      end
+      
+
       def convert(body)
         regex = %r{^\[youtube url=\"https:\/\/youtu.be\/(.*?)\"\]}
         body.gsub(regex) { iframe($1) }
