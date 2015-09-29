@@ -6,14 +6,15 @@ module Middleman
       def initialize(app, options_hash = {}, &block)
         super
         extension = self
-        app.after_render do |body|
-          extension.convert(body)
+        app.before_render do |body|
+    		puts body
+          # extension.convert(body)
         end
       end
 
       def after_configuration
       end
-      
+
 
       def convert(body)
         regex = %r{^\[youtube url=\"https:\/\/youtu.be\/(.*?)\"\]}
