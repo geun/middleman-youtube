@@ -1,3 +1,5 @@
+require 'qq'
+
 module Middleman
   module Youtube
     class Extension < ::Middleman::Extension
@@ -7,7 +9,7 @@ module Middleman
         super
         extension = self
         app.before_render do |body|
-    		logger.debug body.to_s
+    		pp body.to_s
           # extension.convert(body)
         end
       end
