@@ -1,3 +1,5 @@
+require 'middleman-core/logger'
+
 module Middleman
   module Youtube
     class Extension < ::Middleman::Extension
@@ -6,19 +8,24 @@ module Middleman
       def initialize(app, options_hash = {}, &block)
         super
         extension = self
-        app.before_render do |body|
-    	  puts body
+        @app = app
+        app.after_render do |body|
           extension.convert(body)
         end
       end
 
-      def after_configuration
+      # def after_configuration
+      # end
+
+      def logger
+        ::Middleman::Logger.singleton
       end
 
-
       def convert(body)
+        logger.debug body
         regex = %r{^\[youtube url=\"https:\/\/youtu.be\/(.*?)\"\]}
         body.gsub(regex) { iframe($1) }
+
       end
 
       def iframe(path)
